@@ -1,12 +1,13 @@
 package com.example.backend.Services;
 
 import com.example.backend.Entity.CTPNEntity;
+import org.json.simple.JSONObject;
 
 import java.util.List;
 
 public interface CTPNService {
-    CTPNEntity findCTPNbyId(String mapn, String mavt);
-    List<CTPNEntity> getAllCTPN();
+
+    List<JSONObject> getAllCTPN();
     CTPNEntity addCTPN(CTPNEntity ctpn);
 
     CTPNEntity updateCTPN(CTPNEntity ctpn);

@@ -12,10 +12,10 @@ import java.io.Serializable;
 @Setter
 @RequiredArgsConstructor
 public class CTDDHID implements Serializable {
-    private String MADDH;
-    private String MAVT;
-    public CTDDHID(String MADDH,String MAVT){
-        this.MADDH=MADDH;
-        this.MAVT=MAVT;
+    private String maddh;
+    private String mavt;
+    public CTDDHID(String maddh,String mavt){
+        this.maddh=maddh;
+        this.mavt=mavt;
     }
 }

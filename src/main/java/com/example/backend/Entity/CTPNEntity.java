@@ -14,18 +14,21 @@ import java.util.List;
 @Getter
 @Setter
 @RequiredArgsConstructor
-@JsonIdentityInfo( generator = ObjectIdGenerators.PropertyGenerator.class, property = "mactpn")
 public class CTPNEntity{
     @AttributeOverrides({
-            @AttributeOverride(name="my_mapn",column =@Column(name="MAPN")),
-            @AttributeOverride(name="my_mavtpn",column =@Column(name="MAVT")),
+            @AttributeOverride(name="my_mapn",column =@Column(name="mapn")),
+            @AttributeOverride(name="my_mavtpn",column =@Column(name="mavt")),
     })
     @EmbeddedId
     private CTPNID id;
-    private int SOLUONG;
-    private float DONGIA;
+    private int soluong;
+    private float dongia;
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name="MAVT",insertable = false, updatable = false)
+    @JoinColumn(name="mavt",insertable = false, updatable = false)
     private VatTuEntity vatTuCTPN;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="mapn",insertable = false, updatable = false)
+    private PhieuNhapEntity phieuNhapCTPN;
 }

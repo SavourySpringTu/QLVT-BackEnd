@@ -18,19 +18,28 @@ import java.util.List;
 @JsonIdentityInfo( generator = ObjectIdGenerators.PropertyGenerator.class, property = "maddh")
 public class DatHangEntity{
     @Id
-    private String MADDH;
-    private LocalDate NGAY;
-    private String NHACC;
+    private String maddh;
+    private LocalDate ngay;
+    private String nhacc;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="MANV")
+    @JoinColumn(name="manv")
     private NhanVienEntity datHangNV;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="MAKHO")
+    @JoinColumn(name="makho")
     private KhoEntity datHangKho;
+
+    @OneToMany(mappedBy="datHangCTDDH",fetch = FetchType.EAGER)
+    @JsonIgnore
+    private List<CTDDHEntity> ctddhList;
 
     @OneToMany(mappedBy="datHangPN",fetch = FetchType.EAGER)
     @JsonIgnore
     private List<PhieuNhapEntity> phieuNhapList;
+
+    public DatHangEntity(String maddh, String nhacc) {
+        this.maddh = maddh;
+        this.nhacc = nhacc;
+    }
 }

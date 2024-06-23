@@ -1,5 +1,8 @@
 package com.example.backend.Controller;
 
+import com.example.backend.Entity.CTDDHEntity;
+import com.example.backend.Entity.CTDDHID;
+import com.example.backend.Entity.DatHangEntity;
 import com.example.backend.Entity.VatTuEntity;
 import com.example.backend.Services.VatTuService;
 import org.json.simple.JSONObject;
@@ -23,23 +26,24 @@ public class VatTuController {
         List<JSONObject> list = vatTuService.getAllVatTu();
         return ResponseEntity.ok(list);
     }
-    @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public ResponseEntity<VatTuEntity> insertVatTu( @RequestBody VatTuEntity vatTu){
-        return new ResponseEntity(vatTuService.insertVatTu(vatTu),HttpStatus.OK);
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public ResponseEntity<VatTuEntity> insertVatTu( @RequestBody JSONObject vattu){
+        System.out.println(vattu);
+        boolean result = vatTuService.saveVatTu(vattu);
+        if(result==true){
+            return new ResponseEntity(1, HttpStatus.OK);
+        }else{
+            return new ResponseEntity(0,HttpStatus.OK);
+        }
     }
-    @RequestMapping(value = "/vattu/{id}", method = RequestMethod.GET)
-    public ResponseEntity<VatTuEntity> findVatTu(@PathVariable String id){
-        return new ResponseEntity<>(vatTuService.findVatTubyId(id),HttpStatus.OK);
+    @RequestMapping(value = "/delete", method = RequestMethod.PUT)
+    public ResponseEntity<VatTuEntity> deleteVatTu(@RequestBody JSONObject vt){
+        System.out.println(vt.get("mavt"));
+        boolean result = vatTuService.deleteVatTubyId((String) vt.get("mavt"));
+        if(result==true){
+            return new ResponseEntity(1, HttpStatus.OK);
+        }else{
+            return new ResponseEntity(0,HttpStatus.OK);
+        }
     }
-//    @RequestMapping(value = "/vattu/{id}", method = RequestMethod.DELETE)
-//    public ResponseEntity<VatTuEntity> deleteVatTu(@PathVariable String id){
-//        VatTuEntity vt = vatTuService.findVatTubyId(id);
-//        vatTuService.deleteVatTubyId(id);
-//        return new ResponseEntity<>(vt,HttpStatus.OK);
-//    }
-//    @RequestMapping(value = "/vattu", method = RequestMethod.PUT)
-//    public ResponseEntity<VatTuEntity> updateVatTu(@RequestBody VatTuEntity vattu){
-//        System.out.println(vattu.getMAVT());
-//        return new ResponseEntity<>(vatTuService.updateVatTu(vattu),HttpStatus.OK);
-//    }
 }

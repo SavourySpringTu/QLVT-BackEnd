@@ -13,11 +13,11 @@ import java.io.Serializable;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class CTPXID implements Serializable {
-    private String mapx;
+public class CTGHID implements Serializable {
     private String mavt;
-    public CTPXID(String mapx,String mavt){
+    private int magh;
+    public CTGHID(int magh,String mavt){
+        this.magh=magh;
         this.mavt=mavt;
-        this.mapx=mapx;
     }
 }

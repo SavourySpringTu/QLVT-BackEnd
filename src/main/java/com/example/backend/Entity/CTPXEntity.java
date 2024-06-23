@@ -14,17 +14,21 @@ import java.util.List;
 @Getter
 @Setter
 @RequiredArgsConstructor
-@JsonIdentityInfo( generator = ObjectIdGenerators.PropertyGenerator.class, property = "mactpx")
 public class CTPXEntity implements Serializable {
     @AttributeOverrides({
-            @AttributeOverride(name="my_mapx",column =@Column(name="MAPX")),
-            @AttributeOverride(name="my_mavtpx",column =@Column(name="MAVT")),
+            @AttributeOverride(name="my_mapx",column =@Column(name="mapx")),
+            @AttributeOverride(name="my_mavtpx",column =@Column(name="mavt")),
     })
     @EmbeddedId CTPXID id;
-    private int SOLUONG;
-    private float DONGIA;
+    private int soluong;
+    private float dongia;
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name="MAVT",insertable = false, updatable = false)
+    @JoinColumn(name="mavt",insertable = false, updatable = false)
     private VatTuEntity vatTuCTPX;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="mapx",insertable=false, updatable=false)
+    private PhieuXuatEntity phieuXuatCTPX;
+
 }

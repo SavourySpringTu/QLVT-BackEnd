@@ -16,10 +16,10 @@ import java.io.Serializable;
 @JsonIdentityInfo( generator = ObjectIdGenerators.PropertyGenerator.class, property = "mavt")
 public class VatTuEntity implements Serializable{
     @Id
-    private String MAVT;
-    private String TENVT;
-    private String DONVITINH;
-    private int SOLUONGTON;
+    private String mavt;
+    private String tenvt;
+    private String donvitinh;
+    private int soluongton;
 
     @OneToOne(mappedBy = "vatTuCTDDH")
     private CTDDHEntity ctddh;
@@ -27,6 +27,16 @@ public class VatTuEntity implements Serializable{
     @OneToOne(mappedBy = "vatTuCTPN")
     private CTPNEntity ctpn;
 
+    @OneToOne(mappedBy = "vatTuCTGH")
+    private CTGHEntity ctgh;
+
     @OneToOne(mappedBy = "vatTuCTPX")
     private CTPXEntity ctpx;
+
+    public VatTuEntity(String mavt, String tenvt, String donvitinh, int soluongton) {
+        this.mavt = mavt;
+        this.tenvt = tenvt;
+        this.donvitinh = donvitinh;
+        this.soluongton = soluongton;
+    }
 }

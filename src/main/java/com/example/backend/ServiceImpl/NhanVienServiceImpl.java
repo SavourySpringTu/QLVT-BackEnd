@@ -31,7 +31,7 @@ public class NhanVienServiceImpl implements NhanVienService {
         if(result == null){
             return null;
         }else{
-            if(result.getChiNhanhNV().getMACN().equals(cn)==true && result.getMATKHAU().equals(password)==true){
+            if(result.getChiNhanhNV().getMacn().equals(cn)==true && result.getMatkhau().equals(password)==true){
                 return result;
             }else{
                 return null;
@@ -45,15 +45,16 @@ public class NhanVienServiceImpl implements NhanVienService {
         List<JSONObject> nvOj = new ArrayList<>();
         for(NhanVienEntity i :nv){
             JSONObject a = new JSONObject();
-            a .put("macn",i.getChiNhanhNV().getMACN());
-            a .put("diachi",i.getDIACHI());
-            a .put("luong",i.getLUONG());
-            a .put("ngaysinh",i.getNGAYSINH());
-            a .put("socmnd",i.getSOCMND());
-            a .put("maquyen",i.getVaiTroNV().getMAQUYEN());
-            a .put("trangthai",i.isTRANGTHAI());
-            a .put("hoten",i.getHOTEN());
-            a .put("manv",i.getMANV());
+            a .put("macn",i.getChiNhanhNV().getMacn());
+            a .put("diachi",i.getDiachi());
+            a .put("email",i.getEmail());
+            a .put("luong",i.getLuong());
+            a .put("ngaysinh",i.getNgaysinh());
+            a .put("socmnd",i.getSocmnd());
+            a .put("maquyen",i.getVaiTroNV().getMaquyen());
+            a .put("trangthai",i.isTrangthai());
+            a .put("hoten",i.getHoten());
+            a .put("manv",i.getManv());
             nvOj.add(a);
         }
         System.gc();
@@ -62,13 +63,14 @@ public class NhanVienServiceImpl implements NhanVienService {
 
     @Override
     public boolean insertNhanVien(JSONObject nhanvien) {
-        boolean trangthai = Boolean.valueOf((String) nhanvien.get("trangthai"));
+        //boolean trangthai = Boolean.valueOf((String) nhanvien.get("trangthai"));
         nhanVienRepository.save((String) nhanvien.get("hoten"),
                 (String) nhanvien.get("diachi"),
                 (String) nhanvien.get("ngaysinh"),
+                (String) nhanvien.get("email"),
                 String.valueOf(nhanvien.get("luong")),
                 (String) nhanvien.get("socmnd"),
-                trangthai,
+                Boolean.valueOf((String) nhanvien.get("trangthai")),
                 (String) nhanvien.get("macn"),
                 (String) nhanvien.get("maquyen"));
         return true;
@@ -76,14 +78,15 @@ public class NhanVienServiceImpl implements NhanVienService {
 
     @Override
     public boolean updateNhanVien(JSONObject nhanvien) {
-        boolean trangthai = Boolean.valueOf((String) nhanvien.get("trangthai"));
+        //boolean trangthai = Boolean.valueOf((String) nhanvien.get("trangthai"));
         nhanVienRepository.updateByMANV(String.valueOf(nhanvien.get("manv")),
                 (String) nhanvien.get("hoten"),
                 (String) nhanvien.get("diachi"),
                 (String) nhanvien.get("ngaysinh"),
+                (String) nhanvien.get("email"),
                 String.valueOf(nhanvien.get("luong")),
                 (String) nhanvien.get("socmnd"),
-                trangthai,
+                Boolean.valueOf((String) nhanvien.get("trangthai")),
                 (String) nhanvien.get("macn"),
                 (String) nhanvien.get("maquyen"));
         return true;

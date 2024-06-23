@@ -6,8 +6,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name="phieunhap")
@@ -17,18 +17,22 @@ import java.time.LocalDate;
 @JsonIdentityInfo( generator = ObjectIdGenerators.PropertyGenerator.class, property = "mapn")
 public class PhieuNhapEntity{
     @Id
-    private String MAPN;
-    private LocalDate NGAY;
+    private String mapn;
+    private LocalDate ngay;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="MANV")
+    @JoinColumn(name="manv")
     private NhanVienEntity nhanVienPN;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="MAKHO")
+    @JoinColumn(name="makho")
     private KhoEntity khoPN;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="MADDH")
+    @JoinColumn(name="maddh")
     private DatHangEntity datHangPN;
+
+    @OneToMany(mappedBy="phieuNhapCTPN",fetch = FetchType.EAGER)
+    @JsonIgnore
+    private List<CTPNEntity> ctpnList;
 }

@@ -14,15 +14,15 @@ import java.util.List;
 @Setter
 @RequiredArgsConstructor
 @Data
-@Table(name="vaitro")
+@Table(name="VAITRO")
 @JsonIdentityInfo( generator = ObjectIdGenerators.PropertyGenerator.class, property = "maquyen")
 public class VaiTroEntity {
     @Id
-    private String MAQUYEN;
-    private String TENQUYEN;
+    private String maquyen;
+    private String tenquyen;
 
-    public VaiTroEntity(String MAQUYEN) {
-        this.MAQUYEN = MAQUYEN;
+    public VaiTroEntity(String maquyen) {
+        this.maquyen = maquyen;
     }
 
     @OneToMany(mappedBy="vaiTroNV",fetch = FetchType.EAGER)

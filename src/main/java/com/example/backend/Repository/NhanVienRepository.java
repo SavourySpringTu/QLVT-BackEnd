@@ -16,10 +16,10 @@ import java.util.List;
 @Repository
 public interface NhanVienRepository extends JpaRepository<NhanVienEntity,Long> {
     @Modifying
-    @Query(value = "UPDATE nhanvien SET hoten=?2, diachi= ?3, ngaysinh= ?4, luong= ?5, socmnd= ?6, trangthai =?7, macn=?8, maquyen=?9 WHERE manv = ?1",nativeQuery = true)
-    void updateByMANV(String manv,String hoten,String diachi,String ngaysinh,String luong,String socmnd,boolean trangthai,String macn,String maquyen);
+    @Query(value = "UPDATE nhanvien SET hoten=?2, diachi= ?3,ngaysinh= ?4, email=?5, luong= ?6, socmnd= ?7, trangthai =?8, macn=?9, maquyen=?10 WHERE manv = ?1",nativeQuery = true)
+    void updateByMANV(String manv,String hoten,String diachi,String ngaysinh, String email,String luong,String socmnd,boolean trangthai,String macn,String maquyen);
 
     @Modifying
-    @Query(value = "INSERT INTO nhanvien (hoten,diachi,ngaysinh,luong,socmnd,trangthai,macn,maquyen) VALUES (?1,?2,?3,?4,?5,?6,?7,?8)",nativeQuery = true)
-    void save (String hoten,String diachi,String ngaysinh,String luong,String socmnd,boolean trangthai,String macn,String maquyen);
+    @Query(value = "INSERT INTO nhanvien (hoten,diachi,ngaysinh,email,luong,socmnd,trangthai,macn,maquyen) VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9)",nativeQuery = true)
+    void save (String hoten,String diachi,String ngaysinh,String email,String luong,String socmnd,boolean trangthai,String macn,String maquyen);
 }

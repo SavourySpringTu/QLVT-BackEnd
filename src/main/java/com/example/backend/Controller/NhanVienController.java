@@ -22,7 +22,7 @@ public class NhanVienController {
 
     @RequestMapping(value ="/login", method = RequestMethod.POST)
     public ResponseEntity<NhanVienEntity> login(@RequestBody NhanVienEntity nhanvien){
-        NhanVienEntity result = nhanVienService.login(String.valueOf(nhanvien.getChiNhanhNV().getMACN()),nhanvien.getMANV(),nhanvien.getMATKHAU());
+        NhanVienEntity result = nhanVienService.login(String.valueOf(nhanvien.getChiNhanhNV().getMacn()),nhanvien.getManv(),nhanvien.getMatkhau());
         return new ResponseEntity(result, HttpStatus.OK);
     }
     @RequestMapping(value="/list", method = RequestMethod.GET)
@@ -34,9 +34,9 @@ public class NhanVienController {
     public ResponseEntity saveNhanVien(@RequestBody JSONObject nhanvien){
         boolean result = nhanVienService.insertNhanVien(nhanvien);
         if(result == true){
-            return new ResponseEntity(0, HttpStatus.OK);
-        }else{
             return new ResponseEntity(1, HttpStatus.OK);
+        }else{
+            return new ResponseEntity(0, HttpStatus.OK);
         }
     }
     @RequestMapping(value="/update",method = RequestMethod.POST)

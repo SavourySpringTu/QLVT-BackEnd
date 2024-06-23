@@ -19,10 +19,10 @@ import java.util.List;
 @JsonIdentityInfo( generator = ObjectIdGenerators.PropertyGenerator.class, property = "macn")
 public class ChiNhanhEntity{
     @Id
-    private String MACN;
-    private String TEN;
-    private String DIACHI;
-    private String SDT;
+    private String macn;
+    private String tencn;
+    private String diachi;
+    private String sdt;
 
     @OneToMany(mappedBy="chiNhanhKho",fetch = FetchType.EAGER)
     @JsonIgnore

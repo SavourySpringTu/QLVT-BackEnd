@@ -10,23 +10,33 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name="ctddh", uniqueConstraints={@UniqueConstraint(columnNames ={"MADDH","MAVT"})})
+@Table(name="ctddh", uniqueConstraints={@UniqueConstraint(columnNames ={"maddh","mavt"})})
 @Getter
 @Setter
 @RequiredArgsConstructor
-@JsonIdentityInfo( generator = ObjectIdGenerators.PropertyGenerator.class, property = "maddn")
+//@JsonIdentityInfo( generator = ObjectIdGenerators.PropertyGenerator.class, property = "")
 public class CTDDHEntity implements Serializable{
     @AttributeOverrides({
-            @AttributeOverride(name="my_mddh",column=@Column(name="MADDH")),
-            @AttributeOverride(name="my_mavtddh",column=@Column(name="MAVT"))
+            @AttributeOverride(name="my_maddh",column=@Column(name="maddh")),
+            @AttributeOverride(name="my_mavtddh",column=@Column(name="mavt"))
     })
     @EmbeddedId
     private CTDDHID id;
 
-    private int SOLUONG;
-    private float DONGIA;
+    private int soluong;
+    private float dongia;
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name="MAVT",insertable = false, updatable = false)
+    @JoinColumn(name="mavt",insertable = false, updatable = false)
     private VatTuEntity vatTuCTDDH;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="maddh",insertable=false, updatable=false)
+    private DatHangEntity datHangCTDDH;
+
+    public CTDDHEntity(CTDDHID id, int soluong, float dongia) {
+        this.id = id;
+        this.soluong = soluong;
+        this.dongia = dongia;
+    }
 }

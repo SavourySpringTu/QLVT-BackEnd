@@ -14,10 +14,10 @@ import java.io.Serializable;
 @Setter
 @RequiredArgsConstructor
 public class CTPNID implements Serializable {
-    private String MAPN;
-    private String MAVT;
-    public CTPNID(String MAPN,String MAVT){
-        this.MAPN=MAPN;
-        this.MAVT=MAVT;
+    private String mapn;
+    private String mavt;
+    public CTPNID(String mapn,String mavt){
+        this.mapn=mapn;
+        this.mavt=mavt;
     }
 }

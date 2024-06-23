@@ -25,10 +25,10 @@ public class VatTuServiceImpl implements VatTuService {
         List<JSONObject> nvOj = new ArrayList<>();
         for(VatTuEntity i :nv){
             JSONObject a = new JSONObject();
-            a .put("soluongton",i.getSOLUONGTON());
-            a .put("donvitinh",i.getDONVITINH());
-            a .put("tenvt",i.getTENVT());
-            a .put("mavt",i.getMAVT());
+            a .put("soluongton",i.getSoluongton());
+            a .put("donvitinh",i.getDonvitinh());
+            a .put("tenvt",i.getTenvt());
+            a .put("mavt",i.getMavt());
             nvOj.add(a);
         }
         System.gc();
@@ -36,18 +36,21 @@ public class VatTuServiceImpl implements VatTuService {
     }
 
     @Override
-    public boolean insertVatTu(VatTuEntity vatTuEntity) {
+    public boolean saveVatTu(JSONObject vattu) {
+        VatTuEntity vt = new VatTuEntity((String) vattu.get("mavt"),(String) vattu.get("tenvt"),(String) vattu.get("donvitinh"),Integer.valueOf((String) vattu.get("soluongton")));
+        vatTuRepository.save(vt);
         return true;
     }
 
-    @Override
-    public boolean updateVatTu(VatTuEntity vatTuEntity) {
-        return true;
-    }
 
     @Override
     public boolean deleteVatTubyId(String id) {
-        vatTuRepository.deleteById(id);
-        return true;
+        VatTuEntity vt = findVatTubyId(id);
+        if(vt.getSoluongton()!=0){
+            return false;
+        }else{
+            vatTuRepository.deleteById(id);
+            return true;
+        }
     }
 }

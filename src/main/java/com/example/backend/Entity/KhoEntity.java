@@ -17,12 +17,12 @@ import java.util.List;
 @JsonIdentityInfo( generator = ObjectIdGenerators.PropertyGenerator.class, property = "makho")
 public class KhoEntity {
     @Id
-    private String MAKHO;
-    private String TENKHO;
-    private String DIACHI;
+    private String makho;
+    private String tenkho;
+    private String diachi;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="MACN")
+    @JoinColumn(name="macn")
     private ChiNhanhEntity chiNhanhKho;
 
     @OneToMany(mappedBy="datHangKho",fetch = FetchType.EAGER)

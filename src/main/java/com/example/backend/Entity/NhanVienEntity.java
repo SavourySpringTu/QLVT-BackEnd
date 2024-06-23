@@ -19,22 +19,23 @@ import java.util.List;
 public class NhanVienEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long MANV;
+    private Long manv;
 
-    private String HOTEN;
-    private String SOCMND;
-    private String DIACHI;
-    private LocalDate NGAYSINH;
-    private int LUONG;
-    private boolean TRANGTHAI;
-    private String MATKHAU;
+    private String hoten;
+    private String socmnd;
+    private String email;
+    private String diachi;
+    private LocalDate ngaysinh;
+    private int luong;
+    private boolean trangthai;
+    private String matkhau;
 
     @ManyToOne(cascade = CascadeType.PERSIST )
-    @JoinColumn(name="MACN")
+    @JoinColumn(name="macn")
     private ChiNhanhEntity chiNhanhNV;
 
     @ManyToOne(cascade = CascadeType.PERSIST )
-    @JoinColumn(name="MAQUYEN")
+    @JoinColumn(name="maquyen")
     private VaiTroEntity vaiTroNV;
 
     @OneToMany(mappedBy="datHangNV",fetch = FetchType.EAGER)
@@ -49,29 +50,6 @@ public class NhanVienEntity{
     @JsonIgnore
     private List<PhieuXuatEntity> phieuXuatList;
 
-    public NhanVienEntity(Long MANV,String HOTEN, String SOCMND, String DIACHI, LocalDate NGAYSINH, int LUONG, boolean TRANGTHAI, String MATKHAU, ChiNhanhEntity chiNhanhNV, VaiTroEntity vaiTroNV) {
-        this.MANV = MANV;
-        this.HOTEN = HOTEN;
-        this.SOCMND = SOCMND;
-        this.DIACHI = DIACHI;
-        this.NGAYSINH = NGAYSINH;
-        this.LUONG = LUONG;
-        this.TRANGTHAI = TRANGTHAI;
-        this.MATKHAU = MATKHAU;
-        this.chiNhanhNV = chiNhanhNV;
-        this.vaiTroNV = vaiTroNV;
-    }
-    public NhanVienEntity(String HOTEN, String SOCMND, String DIACHI, LocalDate NGAYSINH, int LUONG, boolean TRANGTHAI, String MATKHAU, ChiNhanhEntity chiNhanhNV, VaiTroEntity vaiTroNV) {
-        this.HOTEN = HOTEN;
-        this.SOCMND = SOCMND;
-        this.DIACHI = DIACHI;
-        this.NGAYSINH = NGAYSINH;
-        this.LUONG = LUONG;
-        this.TRANGTHAI = TRANGTHAI;
-        this.MATKHAU = MATKHAU;
-        this.chiNhanhNV = chiNhanhNV;
-        this.vaiTroNV = vaiTroNV;
-    }
 
     public NhanVienEntity() {
 
