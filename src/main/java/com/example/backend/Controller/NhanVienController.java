@@ -31,7 +31,7 @@ public class NhanVienController {
         return ResponseEntity.ok(list);
     }
     @RequestMapping(value="/insert",method = RequestMethod.POST)
-    public ResponseEntity saveNhanVien(@RequestBody JSONObject nhanvien){
+    public ResponseEntity insertNhanVien(@RequestBody JSONObject nhanvien){
         boolean result = nhanVienService.insertNhanVien(nhanvien);
         if(result == true){
             return new ResponseEntity(1, HttpStatus.OK);

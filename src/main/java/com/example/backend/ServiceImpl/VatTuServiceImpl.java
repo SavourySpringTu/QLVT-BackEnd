@@ -21,18 +21,18 @@ public class VatTuServiceImpl implements VatTuService {
 
     @Override
     public List<JSONObject> getAllVatTu() {
-        List<VatTuEntity> nv = vatTuRepository.findAll();
-        List<JSONObject> nvOj = new ArrayList<>();
-        for(VatTuEntity i :nv){
+        List<VatTuEntity> vt = vatTuRepository.findAll();
+        List<JSONObject> vtOj = new ArrayList<>();
+        for(VatTuEntity i :vt){
             JSONObject a = new JSONObject();
             a .put("soluongton",i.getSoluongton());
             a .put("donvitinh",i.getDonvitinh());
             a .put("tenvt",i.getTenvt());
             a .put("mavt",i.getMavt());
-            nvOj.add(a);
+            vtOj.add(a);
         }
         System.gc();
-        return nvOj;
+        return vtOj;
     }
 
     @Override

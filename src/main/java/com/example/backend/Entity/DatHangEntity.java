@@ -38,8 +38,8 @@ public class DatHangEntity{
     @JsonIgnore
     private List<PhieuNhapEntity> phieuNhapList;
 
-    public DatHangEntity(String maddh, String nhacc) {
+    public DatHangEntity(String maddh, String nhacc){
         this.maddh = maddh;
-        this.nhacc = nhacc;
+        this.ngay = ngay;
     }
 }
