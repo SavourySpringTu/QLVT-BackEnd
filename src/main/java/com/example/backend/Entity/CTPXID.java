@@ -14,9 +14,9 @@ import java.io.Serializable;
 @Setter
 @RequiredArgsConstructor
 public class CTPXID implements Serializable {
-    private String mapx;
+    private Long mapx;
     private String mavt;
-    public CTPXID(String mapx,String mavt){
+    public CTPXID(Long mapx,String mavt){
         this.mavt=mavt;
         this.mapx=mapx;
     }

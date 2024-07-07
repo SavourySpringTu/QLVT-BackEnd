@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface NhanVienService {
     NhanVienEntity login(String cn,Long manv,String password);
-    List<JSONObject> listNhanVien();
+    List<JSONObject> getNhanVienbyQuyenandChiNhanh(String maquyen,String macn);
     boolean insertNhanVien(JSONObject nv);
     boolean updateNhanVien(JSONObject nv);
     boolean deleteNhanVien(Long manv);

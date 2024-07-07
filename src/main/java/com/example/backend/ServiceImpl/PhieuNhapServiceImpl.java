@@ -16,7 +16,7 @@ public class PhieuNhapServiceImpl implements PhieuNhapService {
     @Autowired
     private PhieuNhapRepository phieuNhapRepository;
     @Override
-    public PhieuNhapEntity findPhieuNhapbyId(String id) {
+    public PhieuNhapEntity findPhieuNhapbyId(Long id) {
         return phieuNhapRepository.findById(id).get();
     }
 
@@ -45,7 +45,7 @@ public class PhieuNhapServiceImpl implements PhieuNhapService {
     }
 
     @Override
-    public void deletePhieuNhapbyId(String id) {
+    public void deletePhieuNhapbyId(Long id) {
         phieuNhapRepository.deleteById(id);
     }
 }

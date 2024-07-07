@@ -40,10 +40,30 @@ public class NhanVienServiceImpl implements NhanVienService {
     }
 
     @Override
-    public List<JSONObject> listNhanVien() {
-        List<NhanVienEntity> nv = nhanVienRepository.findAll();
+    public List<JSONObject> getNhanVienbyQuyenandChiNhanh(String maquyen,String chinhanh) {
+        List<NhanVienEntity> allNhanVien = nhanVienRepository.findAll();
+        List<NhanVienEntity> nhanVienbyQuyenandChiNhanh = new ArrayList<>();
+        if(maquyen.equals("Q01")==true){
+            for(NhanVienEntity i : allNhanVien){
+                nhanVienbyQuyenandChiNhanh.add(i);
+            }
+        }else{
+            if(chinhanh.equals("CN01")==true){
+                for(NhanVienEntity i : allNhanVien){
+                    if(i.getChiNhanhNV().getMacn().equals("CN01")==true){
+                        nhanVienbyQuyenandChiNhanh.add(i);
+                    }
+                }
+            }else{
+                for(NhanVienEntity i : allNhanVien){
+                    if(i.getChiNhanhNV().getMacn().equals("CN02")==true){
+                        nhanVienbyQuyenandChiNhanh.add(i);
+                    }
+                }
+            }
+        }
         List<JSONObject> nvOj = new ArrayList<>();
-        for(NhanVienEntity i :nv){
+        for(NhanVienEntity i :nhanVienbyQuyenandChiNhanh){
             JSONObject a = new JSONObject();
             a .put("macn",i.getChiNhanhNV().getMacn());
             a .put("diachi",i.getDiachi());
@@ -72,7 +92,8 @@ public class NhanVienServiceImpl implements NhanVienService {
                 (String) nhanvien.get("socmnd"),
                 Boolean.valueOf((String) nhanvien.get("trangthai")),
                 (String) nhanvien.get("macn"),
-                (String) nhanvien.get("maquyen"));
+                (String) nhanvien.get("maquyen"),
+                "123");
         return true;
     }
 

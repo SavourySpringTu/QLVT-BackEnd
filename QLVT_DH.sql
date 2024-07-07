@@ -43,7 +43,7 @@ CREATE TABLE nhanvien(
     FOREIGN KEY (macn) REFERENCES chinhanh(macn)
 );
 CREATE TABLE dathang(
-	maddh NCHAR(8) PRIMARY KEY NOT NULL,
+	maddh INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     ngay DATE NOT NULL,
     nhacc NVARCHAR(100),
     manv INT NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE dathang(
     FOREIGN KEY (manv) REFERENCES nhanvien(manv)
 );
 CREATE TABLE ctddh(
-	maddh NCHAR(8) NOT NULL,
+	maddh INT NOT NULL,
     mavt NCHAR(4) NOT NULL,
     soluong INT NOT NULL,
     dongia FLOAT NOT NULL,
@@ -60,7 +60,7 @@ CREATE TABLE ctddh(
     CONSTRAINT PK_CTDDH PRIMARY KEY (maddh,mavt)
 );
 CREATE TABLE phieunhap(
-	mapn NCHAR(4) PRIMARY KEY NOT NULL,
+	mapn INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     ngay DATE NOT NULL,
 	maddh NCHAR(8) NOT NULL,
     manv INT NOT NULL,
@@ -69,7 +69,7 @@ CREATE TABLE phieunhap(
     FOREIGN KEY (makho) REFERENCES kho(makho)
 );
 CREATE TABLE ctpn(
-	mapn NCHAR(4) NOT NULL,
+	mapn INT NOT NULL,
     mavt NCHAR(4) NOT NULL,
     soluong INT NOT NULL,
     dongia FLOAT NOT NULL,
@@ -105,7 +105,7 @@ CREATE TABLE ctgh(
 );
 
 CREATE TABLE phieuxuat(
-	mapx NCHAR(4) PRIMARY KEY,
+	mapx INT PRIMARY KEY AUTO_INCREMENT,
     ngay DATE NOT NULL,
     makh INT,
     manv INT,
@@ -115,7 +115,7 @@ CREATE TABLE phieuxuat(
     FOREIGN KEY (makh) REFERENCES khachhang(makh)
 );
 CREATE TABLE ctpx(
-	mapx NCHAR(4) NOT NULL,
+	mapx INT NOT NULL,
     mavt NCHAR(4) NOT NULL,
     soluong INT NOT NULL,
     dongia FLOAT NOT NULL,
@@ -130,10 +130,20 @@ INSERT INTO chinhanh (macn,tencn, diachi, sdt) VALUES ('CN01', 'Ha Noi', '12O Qu
 INSERT INTO chinhanh (macn,tencn, diachi, sdt) VALUES ('CN02', 'Ho Chi Minh', '1 Le Thanh Ton Q1 Ho Chi Minh','0987654321');
 INSERT INTO nhanvien (hoten, socmnd,diachi,ngaysinh,luong,matkhau,macn,maquyen,trangthai) VALUES ('Bui Xuan Tu','036201001464','30 Quang Trung Hoan Kiem',20011111,2000,'123','CN01','Q03',0);
 INSERT INTO vattu (mavt,tenvt,donvitinh,soluongton) VALUES ('LG01', 'Ti vi LG 24 inch', 'Cai',10);
+INSERT INTO vattu (mavt,tenvt,donvitinh,soluongton) VALUES ('SS01', 'Ti vi SS 80 inch', 'Cai',10);
 INSERT INTO kho (makho, tenkho, diachi, macn) VALUES ('HN01', 'Kho Hoan Kiem', '55 Ho Giang Vo','CN01');
-INSERT INTO dathang (maddh,ngay,nhacc,manv,makho) VALUES ('DH01', 20230905, 'LG Viet Nam',1,'HN01');
+INSERT INTO kho (makho, tenkho, diachi, macn) VALUES ('HM01', 'Kho Ka Đao', '55 Lê Thánh Tôn ','CN02');
+INSERT INTO dathang (ngay,nhacc,manv,makho) VALUES (20230905, 'LG Viet Nam',1,'HN01');
+INSERT INTO dathang (ngay,nhacc,manv,makho) VALUES (20230630, 'Sam Sung Việt Nam',3,'HM01');
+INSERT INTO ctddh(maddh,mavt,soluong,dongia) VALUES (1,'LG01',10,1000);
+INSERT INTO ctddh(maddh,mavt,soluong,dongia) VALUES (2,'SS01',10,1000);
+INSERT INTO giohang (magh) VALUES (1);
+INSERT INTO giohang (magh) VALUES (2);
+INSERT INTO giohang (magh) VALUES (3);
+INSERT INTO khachhang (hoten,email,sdt,matkhau,diachi,magh) VALUES ('xuantu', 'tuxuanbui1111@gmail.com','0562129598','123','b7/8L Tran Dai Nghia HCM','1');
+INSERT INTO khachhang (hoten,email,sdt,matkhau,diachi,magh) VALUES ('khaibui', 'buikhai0509@gmail.com','0963959667','123','b7/8L Tran Dai Nghia HCM','2');
+INSERT INTO khachhang (hoten,email,sdt,matkhau,diachi,magh) VALUES ('lehuong', 'lethihuong1974@gmail.com','01212587066','123','b7/8L Tran Dai Nghia HCM','3');
 
-INSERT INTO ctddh (maddh,mavt,soluong,dongia) VALUES ('DH01', 'LG01', 10,1000);
-INSERT INTO phieunhap (mapn,ngay,manv,makho) VALUES ('PN01',20240614,1,'HN01');
-INSERT INTO phieunhap (mapn,ngay,manv,makho) VALUES ('PN02',20240614,1,'HN01');
-INSERT INTO ctpn (mapn,mavt,soluong,dongia) VALUES ('PN01','LG01',10,5000);
+INSERT INTO phieunhap (ngay,manv,makho) VALUES (20240614,1,'HN01');
+INSERT INTO phieunhap (ngay,manv,makho) VALUES (20240614,1,'HN01');
+INSERT INTO ctpn (mapn,mavt,soluong,dongia) VALUES (1,'LG01',10,5000);

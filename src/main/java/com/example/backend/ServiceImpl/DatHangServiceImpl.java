@@ -15,15 +15,35 @@ public class DatHangServiceImpl implements DatHangService {
     @Autowired
     private DatHangRepository datHangRepository;
     @Override
-    public DatHangEntity findDatHangbyId(String id) {
+    public DatHangEntity findDatHangbyId(Long id) {
         return datHangRepository.findById(id).get();
     }
 
     @Override
-    public List<JSONObject> getAllDatHang() {
-        List<DatHangEntity> dathang = datHangRepository.findAll();
+    public List<JSONObject> getDatHangbyQuyenandChiNhanh(String maquyen,String macn) {
+        List<DatHangEntity> alldathang = datHangRepository.findAll();
+        List<DatHangEntity> dathangbyquyenandchinhanh = new ArrayList<>();
+        if(maquyen.equals("Q01")){
+            for(DatHangEntity i : alldathang){
+                dathangbyquyenandchinhanh.add(i);
+            }
+        }else{
+            if(macn.equals("CN01")==true){
+                for(DatHangEntity i : alldathang){
+                    if(i.getDatHangKho().getChiNhanhKho().getMacn().equals("CN01")==true){
+                        dathangbyquyenandchinhanh.add(i);
+                    }
+                }
+            }else{
+                for(DatHangEntity i : alldathang){
+                    if(i.getDatHangKho().getChiNhanhKho().getMacn().equals("CN02")==true){
+                        dathangbyquyenandchinhanh.add(i);
+                    }
+                }
+            }
+        }
         List<JSONObject> dhOj = new ArrayList<>();
-        for(DatHangEntity i : dathang){
+        for(DatHangEntity i : dathangbyquyenandchinhanh){
             JSONObject a = new JSONObject();
             a .put("makho",i.getDatHangKho().getMakho());
             a .put("manv",i.getDatHangNV().getManv());
@@ -38,17 +58,19 @@ public class DatHangServiceImpl implements DatHangService {
 
     @Override
     public boolean insertDatHang(JSONObject datHang) {
-        datHangRepository.save((String) datHang.get("maddh"),(String) datHang.get("ngay"),(String) datHang.get("nhacc"),(String) datHang.get("manv"));
+        datHangRepository.save((String) datHang.get("ngay"),(String) datHang.get("nhacc"),(String) datHang.get("makho"),(String) datHang.get("manv"));
         return true;
     }
 
     @Override
-    public DatHangEntity updateDatHang(DatHangEntity datHang) {
-        return datHangRepository.save(datHang);
+    public boolean updateDatHang(String nhacc, Long maddh) {
+        datHangRepository.updateByMaDDH(nhacc,maddh);
+        return true;
     }
 
     @Override
-    public void deleteDatHangbyId(String id) {
-        datHangRepository.deleteById(id);
+    public boolean deleteDatHangbyMaDDH(Long maddh) {
+        datHangRepository.deleteById(maddh);
+        return true;
     }
 }

@@ -1,7 +1,9 @@
 package com.example.backend.ServiceImpl;
 
+import com.example.backend.Entity.ChiNhanhEntity;
 import com.example.backend.Entity.KhoEntity;
 import com.example.backend.Entity.NhanVienEntity;
+import com.example.backend.Repository.ChiNhanhRepository;
 import com.example.backend.Repository.KhoRepository;
 import com.example.backend.Services.KhoService;
 import org.json.simple.JSONObject;
@@ -15,12 +17,34 @@ import java.util.List;
 public class KhoServiceImpl implements KhoService {
     @Autowired
     private KhoRepository khoRepository;
+    private ChiNhanhRepository chiNhanhRepository;
 
     @Override
-    public List<JSONObject> listKho() {
-        List<KhoEntity> kho = khoRepository.findAll();
+    public List<JSONObject> getKhobyQuyenandChiNhanh(String maquyen,String macn) {
+        List<KhoEntity> allKho = khoRepository.findAll();
+        List<KhoEntity> khobyQuyenandChiNhanh = new ArrayList<>();
+        if(maquyen.equals("Q01")==true){
+            for(KhoEntity i : allKho){
+                khobyQuyenandChiNhanh.add(i);
+            }
+        }else{
+            if(macn.equals("CN01")==true){
+                for(KhoEntity i : allKho){
+                    if(i.getChiNhanhKho().getMacn().equals("CN01")==true){
+                        khobyQuyenandChiNhanh.add(i);
+                    }
+                }
+            }else{
+                for(KhoEntity i : allKho){
+                    if(i.getChiNhanhKho().getMacn().equals("CN02")==true){
+                        khobyQuyenandChiNhanh.add(i);
+                    }
+                }
+            }
+        }
+
         List<JSONObject> khoOj = new ArrayList<>();
-        for(KhoEntity i : kho){
+        for(KhoEntity i : khobyQuyenandChiNhanh){
             JSONObject a = new JSONObject();
             a .put("chinhanh",i.getChiNhanhKho().getMacn());
             a .put("diachi",i.getDiachi());
@@ -31,4 +55,5 @@ public class KhoServiceImpl implements KhoService {
         System.gc();
         return khoOj;
     }
+
 }

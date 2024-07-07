@@ -14,9 +14,9 @@ import java.io.Serializable;
 @Setter
 @RequiredArgsConstructor
 public class CTPNID implements Serializable {
-    private String mapn;
+    private Long mapn;
     private String mavt;
-    public CTPNID(String mapn,String mavt){
+    public CTPNID(Long mapn,String mavt){
         this.mapn=mapn;
         this.mavt=mavt;
     }

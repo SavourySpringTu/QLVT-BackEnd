@@ -20,6 +20,6 @@ public interface NhanVienRepository extends JpaRepository<NhanVienEntity,Long> {
     void updateByMANV(String manv,String hoten,String diachi,String ngaysinh, String email,String luong,String socmnd,boolean trangthai,String macn,String maquyen);
 
     @Modifying
-    @Query(value = "INSERT INTO nhanvien (hoten,diachi,ngaysinh,email,luong,socmnd,trangthai,macn,maquyen) VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9)",nativeQuery = true)
-    void save (String hoten,String diachi,String ngaysinh,String email,String luong,String socmnd,boolean trangthai,String macn,String maquyen);
+    @Query(value = "INSERT INTO nhanvien (hoten,diachi,ngaysinh,email,luong,socmnd,trangthai,macn,maquyen,matkhau) VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10)",nativeQuery = true)
+    void save (String hoten,String diachi,String ngaysinh,String email,String luong,String socmnd,boolean trangthai,String macn,String maquyen,String matkhau);
 }

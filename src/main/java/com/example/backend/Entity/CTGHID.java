@@ -15,8 +15,8 @@ import java.io.Serializable;
 @RequiredArgsConstructor
 public class CTGHID implements Serializable {
     private String mavt;
-    private int magh;
-    public CTGHID(int magh,String mavt){
+    private Long magh;
+    public CTGHID(Long magh,String mavt){
         this.magh=magh;
         this.mavt=mavt;
     }

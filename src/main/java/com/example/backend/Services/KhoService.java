@@ -1,9 +1,10 @@
 package com.example.backend.Services;
 
+import com.example.backend.Entity.KhoEntity;
 import org.json.simple.JSONObject;
 
 import java.util.List;
 
 public interface KhoService {
-    List<JSONObject> listKho();
+    List<JSONObject> getKhobyQuyenandChiNhanh(String maquyen,String macn);
 }

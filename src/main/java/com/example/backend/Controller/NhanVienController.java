@@ -25,9 +25,9 @@ public class NhanVienController {
         NhanVienEntity result = nhanVienService.login(String.valueOf(nhanvien.getChiNhanhNV().getMacn()),nhanvien.getManv(),nhanvien.getMatkhau());
         return new ResponseEntity(result, HttpStatus.OK);
     }
-    @RequestMapping(value="/list", method = RequestMethod.GET)
-    public ResponseEntity<List<JSONObject>> listNhanVien() {
-        List<JSONObject> list = nhanVienService.listNhanVien();
+    @RequestMapping(value="/list", method = RequestMethod.POST)
+    public ResponseEntity<List<JSONObject>> listNhanVien(@RequestBody JSONObject data) {
+        List<JSONObject> list = nhanVienService.getNhanVienbyQuyenandChiNhanh((String) data.get("maquyen"),(String) data.get("macn"));
         return ResponseEntity.ok(list);
     }
     @RequestMapping(value="/insert",method = RequestMethod.POST)

@@ -18,15 +18,16 @@ import java.util.List;
 @JsonIdentityInfo( generator = ObjectIdGenerators.PropertyGenerator.class, property = "maddh")
 public class DatHangEntity{
     @Id
-    private String maddh;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long maddh;
     private LocalDate ngay;
     private String nhacc;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="manv")
     private NhanVienEntity datHangNV;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="makho")
     private KhoEntity datHangKho;
 
@@ -38,7 +39,7 @@ public class DatHangEntity{
     @JsonIgnore
     private List<PhieuNhapEntity> phieuNhapList;
 
-    public DatHangEntity(String maddh, String nhacc){
+    public DatHangEntity(long maddh, String nhacc){
         this.maddh = maddh;
         this.ngay = ngay;
     }

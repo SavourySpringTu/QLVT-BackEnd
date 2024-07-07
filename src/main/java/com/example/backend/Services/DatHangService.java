@@ -6,9 +6,9 @@ import org.json.simple.JSONObject;
 import java.util.List;
 
 public interface DatHangService {
-    DatHangEntity findDatHangbyId(String id);
-    List<JSONObject> getAllDatHang();
+    DatHangEntity findDatHangbyId(Long id);
+    List<JSONObject> getDatHangbyQuyenandChiNhanh(String maquyen,String macn);
     boolean insertDatHang(JSONObject datHang);
-    DatHangEntity updateDatHang(DatHangEntity datHang);
-    void deleteDatHangbyId(String id);
+    boolean updateDatHang(String nhacc, Long  maddh);
+    boolean deleteDatHangbyMaDDH(Long maddh);
 }

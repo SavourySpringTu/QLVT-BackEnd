@@ -38,7 +38,7 @@ public class NhanVienEntity{
     @JoinColumn(name="maquyen")
     private VaiTroEntity vaiTroNV;
 
-    @OneToMany(mappedBy="datHangNV",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="datHangNV",fetch = FetchType.LAZY)
     @JsonIgnore
     private List<DatHangEntity> datHangList;
 

@@ -12,5 +12,5 @@ public interface CTPNService {
 
     CTPNEntity updateCTPN(CTPNEntity ctpn);
 
-    void deleteCTPNbyId(String mapn, String mavt);
+    void deleteCTPNbyId(Long mapn, String mavt);
 }

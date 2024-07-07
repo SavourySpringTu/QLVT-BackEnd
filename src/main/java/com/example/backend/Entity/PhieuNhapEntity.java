@@ -17,7 +17,8 @@ import java.util.List;
 @JsonIdentityInfo( generator = ObjectIdGenerators.PropertyGenerator.class, property = "mapn")
 public class PhieuNhapEntity{
     @Id
-    private String mapn;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long mapn;
     private LocalDate ngay;
 
     @ManyToOne(cascade = CascadeType.ALL)

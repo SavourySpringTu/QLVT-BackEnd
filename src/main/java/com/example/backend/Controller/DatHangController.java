@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -18,9 +19,9 @@ public class DatHangController {
     @Autowired
     private DatHangService datHangService;
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ResponseEntity<List<JSONObject>> listDatHang(){
-        List<JSONObject> list = datHangService.getAllDatHang();
+    @RequestMapping(value = "/list", method = RequestMethod.POST )
+    public ResponseEntity<List<JSONObject>> listDatHang(@RequestBody JSONObject data){
+        List<JSONObject> list = datHangService.getDatHangbyQuyenandChiNhanh((String) data.get("maquyen"),(String) data.get("macn"));
         return ResponseEntity.ok(list);
     }
 
@@ -34,15 +35,23 @@ public class DatHangController {
         }
     }
 
-    @RequestMapping(value = "/dathang/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<DatHangEntity> updateDatHang(@RequestBody DatHangEntity datHang){
-        return new ResponseEntity<DatHangEntity>(datHangService.updateDatHang(datHang),HttpStatus.OK);
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    public ResponseEntity updateDatHang (@RequestBody JSONObject datHang){
+        boolean result = datHangService.updateDatHang((String) datHang.get("nhacc"),Long.parseLong((String)datHang.get("maddh")));
+        if(result == true){
+            return new ResponseEntity(1, HttpStatus.OK);
+        }else{
+            return new ResponseEntity(0, HttpStatus.OK);
+        }
     }
-
-    @RequestMapping(value = "/dathang/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<DatHangEntity> deleteDatHang(@PathVariable String id){
-        DatHangEntity datHang = datHangService.findDatHangbyId(id);
-        datHangService.deleteDatHangbyId(id);
-        return new ResponseEntity<DatHangEntity>(datHang,HttpStatus.OK);
+    @RequestMapping(value="/delete",method = RequestMethod.PUT)
+    public ResponseEntity deleteDatHang (@RequestBody JSONObject datHang){
+        System.out.println((String)datHang.get("maddh"));
+        boolean result = datHangService.deleteDatHangbyMaDDH(Long.parseLong((String)datHang.get("maddh")));
+        if(result == true){
+            return new ResponseEntity(1, HttpStatus.OK);
+        }else{
+            return new ResponseEntity(0, HttpStatus.OK);
+        }
     }
 }

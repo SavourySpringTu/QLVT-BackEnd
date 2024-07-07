@@ -43,7 +43,7 @@ public class CTPNServiceImpl implements CTPNService {
     }
 
     @Override
-    public void deleteCTPNbyId(String mapn, String mavt) {
+    public void deleteCTPNbyId(Long mapn, String mavt) {
         CTPNID id = new CTPNID(mapn,mavt);
         ctpnRepository.deleteById(id);
     }

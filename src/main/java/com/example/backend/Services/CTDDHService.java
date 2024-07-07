@@ -1,13 +1,11 @@
 package com.example.backend.Services;
 
 import com.example.backend.Entity.CTDDHEntity;
+import org.json.simple.JSONObject;
 
 import java.util.List;
 
 public interface CTDDHService {
-    CTDDHEntity findCTDDHbyId(String maddh,String mavt);
-    List<CTDDHEntity> getAllCTDDH();
-    CTDDHEntity addCTDDH(CTDDHEntity ctddh);
-    CTDDHEntity updateCTDDH(CTDDHEntity ctddh);
-    void deleteCTDDHbyId(String maddh,String mavt);
+    List<JSONObject> getCTDDHbyQuyenandChiNhanh(String maquyen, String macn);
+    boolean insertCTDDH(JSONObject ctddh);
 }
