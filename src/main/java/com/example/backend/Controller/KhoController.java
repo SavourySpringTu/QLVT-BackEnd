@@ -26,4 +26,24 @@ public class KhoController {
         List<JSONObject> list = khoService.getKhobyQuyenandChiNhanh((String) data.get("maquyen"),(String) data.get("macn"));
         return ResponseEntity.ok(list);
     }
+
+    @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    public ResponseEntity insertKho(@RequestBody JSONObject data){
+        boolean result = khoService.insertKho(data);
+        if(result==true){
+            return new ResponseEntity(1,HttpStatus.OK);
+        }else{
+            return new ResponseEntity(0,HttpStatus.OK);
+        }
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public ResponseEntity updateKho(@RequestBody JSONObject data){
+        boolean result = khoService.updateKho(data);
+        if(result==true){
+            return new ResponseEntity(1,HttpStatus.OK);
+        }else{
+            return new ResponseEntity(0,HttpStatus.OK);
+        }
+    }
 }

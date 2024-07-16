@@ -1,5 +1,6 @@
 package com.example.backend.ServiceImpl;
 
+import com.example.backend.Entity.DatHangEntity;
 import com.example.backend.Entity.PhieuNhapEntity;
 import com.example.backend.Entity.VatTuEntity;
 import com.example.backend.Repository.PhieuNhapRepository;
@@ -15,37 +16,41 @@ import java.util.List;
 public class PhieuNhapServiceImpl implements PhieuNhapService {
     @Autowired
     private PhieuNhapRepository phieuNhapRepository;
-    @Override
-    public PhieuNhapEntity findPhieuNhapbyId(Long id) {
-        return phieuNhapRepository.findById(id).get();
-    }
 
     @Override
-    public List<JSONObject> getAllPhieuNhap() {
-        List<PhieuNhapEntity> pn = phieuNhapRepository.findAll();
-        List<JSONObject> pnOj = new ArrayList<>();
-        for(PhieuNhapEntity i :pn){
+    public List<JSONObject> getPhieuNhapbyQuyenandChiNhanh(String maquyen,String macn) {
+        List<PhieuNhapEntity> allphieunhap = phieuNhapRepository.findAll();
+        List<PhieuNhapEntity> phieunhapbyquyenandchinhanh = new ArrayList<>();
+        if(maquyen.equals("Q01")){
+            for(PhieuNhapEntity i : allphieunhap){
+                phieunhapbyquyenandchinhanh.add(i);
+            }
+        }else{
+            if(macn.equals("CN01")==true){
+                for(PhieuNhapEntity i : allphieunhap){
+                    if(i.getKhoPN().getChiNhanhKho().getMacn().equals("CN01")==true){
+                        phieunhapbyquyenandchinhanh.add(i);
+                    }
+                }
+            }else{
+                for(PhieuNhapEntity i : allphieunhap){
+                    if(i.getKhoPN().getChiNhanhKho().getMacn().equals("CN02")==true){
+                        phieunhapbyquyenandchinhanh.add(i);
+                    }
+                }
+            }
+        }
+        List<JSONObject> dhOj = new ArrayList<>();
+        for(PhieuNhapEntity i : phieunhapbyquyenandchinhanh   ){
             JSONObject a = new JSONObject();
-            a .put("mapn",i.getMapn());
+            a .put("manv",i.getNhanVienPN().getManv());
+            a .put("makho",i.getKhoPN().getMakho());
+            a .put("maddh",i.getDatHangPN().getMaddh());
             a .put("ngay",i.getNgay());
-            pnOj.add(a);
+            a .put("mapn",i.getMapn());
+            dhOj.add(a);
         }
         System.gc();
-        return pnOj;
-    }
-
-    @Override
-    public PhieuNhapEntity addPhieuNhap(PhieuNhapEntity phieuNhap) {
-        return phieuNhapRepository.save(phieuNhap);
-    }
-
-    @Override
-    public PhieuNhapEntity updatePhieuNhap(PhieuNhapEntity phieuNhap) {
-        return phieuNhapRepository.save(phieuNhap);
-    }
-
-    @Override
-    public void deletePhieuNhapbyId(Long id) {
-        phieuNhapRepository.deleteById(id);
+        return dhOj;
     }
 }

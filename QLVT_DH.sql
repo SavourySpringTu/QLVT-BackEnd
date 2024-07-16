@@ -3,6 +3,7 @@ DROP DATABASE qlvt;
 CREATE DATABASE qlvt;
 USE qlvt;
 
+
 CREATE TABLE vaitro(
 	maquyen NCHAR(3) PRIMARY KEY NOT NULL,
     tenquyen NVARCHAR(15)
@@ -134,9 +135,12 @@ INSERT INTO vattu (mavt,tenvt,donvitinh,soluongton) VALUES ('SS01', 'Ti vi SS 80
 INSERT INTO kho (makho, tenkho, diachi, macn) VALUES ('HN01', 'Kho Hoan Kiem', '55 Ho Giang Vo','CN01');
 INSERT INTO kho (makho, tenkho, diachi, macn) VALUES ('HM01', 'Kho Ka Đao', '55 Lê Thánh Tôn ','CN02');
 INSERT INTO dathang (ngay,nhacc,manv,makho) VALUES (20230905, 'LG Viet Nam',1,'HN01');
-INSERT INTO dathang (ngay,nhacc,manv,makho) VALUES (20230630, 'Sam Sung Việt Nam',3,'HM01');
+INSERT INTO dathang (ngay,nhacc,manv,makho) VALUES (20230905, 'Sam Sung Việt Nam',1,'HN01');
 INSERT INTO ctddh(maddh,mavt,soluong,dongia) VALUES (1,'LG01',10,1000);
+INSERT INTO ctddh(maddh,mavt,soluong,dongia) VALUES (1,'SS01',10,1000);
+INSERT INTO ctddh(maddh,mavt,soluong,dongia) VALUES (2,'LG01',10,1000);
 INSERT INTO ctddh(maddh,mavt,soluong,dongia) VALUES (2,'SS01',10,1000);
+INSERT INTO phieunhap(ngay,maddh,manv,makho) VALUES (2020905,1,1,'HN01');
 INSERT INTO giohang (magh) VALUES (1);
 INSERT INTO giohang (magh) VALUES (2);
 INSERT INTO giohang (magh) VALUES (3);

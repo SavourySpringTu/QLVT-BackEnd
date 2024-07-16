@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface CTPNService {
 
-    List<JSONObject> getAllCTPN();
-    CTPNEntity addCTPN(CTPNEntity ctpn);
+    List<JSONObject> getAllCTPN(String quyen,String chinhanh);
+    boolean insertCTPN(JSONObject ctpn);
 
     CTPNEntity updateCTPN(CTPNEntity ctpn);
 

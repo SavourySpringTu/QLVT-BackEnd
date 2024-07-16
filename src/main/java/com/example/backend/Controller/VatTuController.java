@@ -22,7 +22,7 @@ public class VatTuController {
     private VatTuService vatTuService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ResponseEntity<List<JSONObject>> listVatTu(){
+    public ResponseEntity<List<JSONObject>> listVatTu(@RequestBody JSONObject data){
         List<JSONObject> list = vatTuService.getAllVatTu();
         return ResponseEntity.ok(list);
     }

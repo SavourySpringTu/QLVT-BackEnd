@@ -7,9 +7,5 @@ import org.json.simple.JSONObject;
 import java.util.List;
 
 public interface PhieuNhapService {
-    PhieuNhapEntity findPhieuNhapbyId(Long id);
-    List<JSONObject> getAllPhieuNhap();
-    PhieuNhapEntity addPhieuNhap(PhieuNhapEntity phieuNhap);
-    PhieuNhapEntity updatePhieuNhap(PhieuNhapEntity phieuNhap);
-    void deletePhieuNhapbyId(Long id);
+    List<JSONObject> getPhieuNhapbyQuyenandChiNhanh(String maquyen,String macn);
 }

@@ -56,4 +56,23 @@ public class KhoServiceImpl implements KhoService {
         return khoOj;
     }
 
+    @Override
+    public boolean insertKho(JSONObject kho) {
+        try {
+            khoRepository.insertKho((String) kho.get("makho"), (String) kho.get("tenkho"), (String) kho.get("diachi"), (String) kho.get("macn"));
+        }catch (Exception e){
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean updateKho(JSONObject kho) {
+        try {
+            khoRepository.updateKho((String) kho.get("tenkho"),(String) kho.get("diachi"),(String) kho.get("makho"));
+        }catch (Exception e){
+            return false;
+        }
+        return true;
+    }
 }

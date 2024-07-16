@@ -24,10 +24,7 @@ public class CTDDHController {
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public ResponseEntity<List<JSONObject>> listAllCTDDH(@RequestBody JSONObject data){
         List<JSONObject> result = ctddhService.getCTDDHbyQuyenandChiNhanh((String) data.get("maquyen"),(String) data.get("macn"));
-        if(result.isEmpty()) {
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity (result, HttpStatus.OK);
+        return new ResponseEntity(result, HttpStatus.OK);
     }
     @RequestMapping(value = "/insert",method = RequestMethod.POST)
     public ResponseEntity insertCTDDH(@RequestBody JSONObject data){
@@ -40,5 +37,30 @@ public class CTDDHController {
             return new ResponseEntity(1,HttpStatus.OK);
         }
         return new ResponseEntity(0,HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    public ResponseEntity updateCTDDH(@RequestBody JSONObject data){
+        System.out.println("toi day");
+        System.out.println((String) data.get("maddh"));
+        System.out.println((String) data.get("mavt"));
+        System.out.println((String) data.get("mavtupdate"));
+        System.out.println((String) data.get("soluong"));
+        System.out.println((String) data.get("dongia"));
+        boolean result = ctddhService.updateCTDDH(data);
+        if(result==true){
+            return new ResponseEntity(1,HttpStatus.OK);
+        }
+        return new ResponseEntity(0,HttpStatus.OK);
+    }
+
+    @RequestMapping(value="/delete", method = RequestMethod.POST)
+    public ResponseEntity deleteCTDDH(@RequestBody JSONObject data) {
+        boolean result = ctddhService.deleteCTDDH(data);
+        if(result==true){
+            return new ResponseEntity(1,HttpStatus.OK);
+        }else {
+            return new ResponseEntity(0,HttpStatus.OK);
+        }
     }
 }

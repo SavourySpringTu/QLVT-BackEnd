@@ -3,7 +3,9 @@ package com.example.backend.ServiceImpl;
 import com.example.backend.Entity.CTDDHEntity;
 import com.example.backend.Entity.CTDDHID;
 import com.example.backend.Entity.KhoEntity;
+import com.example.backend.Entity.PhieuNhapEntity;
 import com.example.backend.Repository.CTDDHRepository;
+import com.example.backend.Repository.PhieuNhapRepository;
 import com.example.backend.Services.CTDDHService;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ import java.util.List;
 public class CTDDHServiceImpl implements CTDDHService {
     @Autowired
     private CTDDHRepository ctddhRepository;
+    @Autowired
+    private PhieuNhapRepository phieuNhapRepository;
 
 
     @Override
@@ -58,5 +62,24 @@ public class CTDDHServiceImpl implements CTDDHService {
     public boolean insertCTDDH(JSONObject ctddh) {
         ctddhRepository.save((String) ctddh.get("maddh"),(String) ctddh.get("mavt"),(String) ctddh.get("soluong"),(String) ctddh.get("dongia"));
         return true;
+    }
+
+    @Override
+    public boolean updateCTDDH(JSONObject ctddh) {
+        ctddhRepository.updatebyid((String) ctddh.get("mavtupdate"),(String) ctddh.get("soluong"),(String) ctddh.get("dongia"), (String) ctddh.get("maddh"),(String) ctddh.get("mavt"));
+        return true;
+    }
+
+    @Override
+    public boolean deleteCTDDH(JSONObject ctddh) {
+        List<PhieuNhapEntity> pn = phieuNhapRepository.findByMaDDH((String) ctddh.get("maddh"));
+        System.out.println(pn);
+        if(pn.isEmpty()){
+            ctddhRepository.deleteById((String) ctddh.get("maddh"),(String) ctddh.get("mavt"));
+            System.out.println("xoa xong");
+            return true;
+        }else{
+            return false;
+        }
     }
 }

@@ -1,6 +1,6 @@
 package com.example.backend.Controller;
 
-import com.example.backend.Services.PhieuXuatService;
+import com.example.backend.Services.CTPXService;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,15 +14,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 @Controller
-@RequestMapping("backend/api/phieuxuat")
 @CrossOrigin(origins = "*")
-public class PhieuXuatController {
+public class CTPXController {
     @Autowired
-    private PhieuXuatService phieuXuatService;
+    private CTPXService ctpxService;
 
     @RequestMapping(value = "/list",method = RequestMethod.POST)
-    public ResponseEntity<List<JSONObject>> getListPhieuXuat(@RequestBody JSONObject data){
-        List<JSONObject> result = phieuXuatService.getPhieuXuatbyQuyenandChiNhanh((String) data.get("maquyen"),(String) data.get("macn"));
+    public ResponseEntity<List<JSONObject>> getListCTPX(@RequestBody JSONObject data){
+        List<JSONObject> result = ctpxService.getCTPXbyQuyenandChiNhanh((String) data.get("maquyen"),(String) data.get("macn"));
         return new ResponseEntity(result, HttpStatus.OK);
     }
 }

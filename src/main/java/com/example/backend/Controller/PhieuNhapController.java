@@ -1,5 +1,6 @@
 package com.example.backend.Controller;
 
+import com.example.backend.Entity.NhanVienEntity;
 import com.example.backend.Entity.PhieuNhapEntity;
 import com.example.backend.Services.PhieuNhapService;
 import org.json.simple.JSONObject;
@@ -18,9 +19,9 @@ public class PhieuNhapController{
     @Autowired
     private PhieuNhapService phieuNhapService;
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ResponseEntity<List<JSONObject>> listPhieuNhap(){
-        List<JSONObject> list = phieuNhapService.getAllPhieuNhap();
+    @RequestMapping(value="/list", method = RequestMethod.POST)
+    public ResponseEntity<List<JSONObject>> listPhieuNhap(@RequestBody JSONObject data) {
+        List<JSONObject> list = phieuNhapService.getPhieuNhapbyQuyenandChiNhanh((String) data.get("maquyen"),(String) data.get("macn"));
         return ResponseEntity.ok(list);
     }
 

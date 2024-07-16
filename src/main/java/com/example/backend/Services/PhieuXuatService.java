@@ -5,5 +5,5 @@ import org.json.simple.JSONObject;
 import java.util.List;
 
 public interface PhieuXuatService {
-    List<JSONObject> getAllPhieuXuat();
+    List<JSONObject> getPhieuXuatbyQuyenandChiNhanh(String quyen,String chinhanh);
 }
